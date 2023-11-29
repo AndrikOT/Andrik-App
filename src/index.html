@@ -18,7 +18,7 @@
     <!-- Navbar con tema oscuro -->
     <nav class="navbar navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">MANUALIDADES DE LA UTN </a>
+            <a class="navbar-brand" href="#">ORGANIZACIONES UNIVERSALES </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                 aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -43,18 +43,14 @@
                         <li class="nav-item">
                             <a class="nav-link botonesConSesion" id="Mostrar-Manualidades"
                                 href="Subir Manualidades.html">SUBIR UNA
-                                MANUALIDAD</a>
+                                ORGANIZACION</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link botonesConSesion" id="Mostrar-Manualidades" href="index.html">VER
-                                MANUALIDADES</a>
+                                ORGANIZACIONES</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link botonesConSesion" id="CerrarSesion">CERRAR SESIÓN</a>
-                        </li>
-                        <li class="nav-item">
-                            <p class="nav-link">Derechos reservados <br>&COPY; Irvin Alberto Moreno Cruz
-                                <p />
                         </li>
                     </ul>
                 </div>
@@ -64,14 +60,57 @@
 
     <!-- Contenido del cuerpo aquí -->
 
-    <!-- Lista de Maestros -->
+    <!-- Lista de Organizaciones -->
     <div class="container p-4 mt-5">
         <div class="row">
             <div class="col-md-6 offset-md-3 mt-5">
-                <ul class="list-group Maestros"></ul>
+                <ul class="list-group Organizaciones"></ul>
             </div>
         </div>
     </div>
+
+    <!-- MODAL DE ACTUALIZACIÓN -->
+    <div class="modal fade" id="ActualizarOrganizacion" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header bg-dark">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar Organización</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="Formulario-ActualizarOrganizacion">
+                        <div class="mb-3">
+                            <label for="Actualizar-Nombre">Nombre de la Organización</label>
+                            <input type="text" id="Actualizar-Nombre" class="form-control mb-3"
+                                placeholder="Ingresa el nuevo nombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="Actualizar-Integrantes">Número de Integrantes</label>
+                            <input type="number" id="Actualizar-Integrantes" class="form-control mb-3"
+                                placeholder="Ingresa el nuevo número de integrantes">
+                        </div>
+                        <div class="mb-3">
+                            <label for="Actualizar-Lider">Líder</label>
+                            <input type="text" id="Actualizar-Lider" class="form-control mb-3"
+                                placeholder="Ingresa el nuevo líder">
+                        </div>
+                        <div class="mb-3">
+                            <label for="Actualizar-NumeroAliados">Número de Aliados</label>
+                            <input type="number" id="Actualizar-NumeroAliados" class="form-control mb-3"
+                                placeholder="Ingresa el nuevo número de aliados">
+                        </div>
+                        <div class="mb-3">
+                            <label for="Actualizar-FechaContratacion">Fecha de Contratación</label>
+                            <input type="date" id="Actualizar-FechaContratacion" class="form-control mb-3">
+                        </div>
+                        <button class="btn btn-primary w-100 mb-2 edit Boton-ActualizarOrganizacion">Actualizar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- MODAL DE INICIO DE SESION -->
     <div class="modal fade" id="InicioSesion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -98,7 +137,7 @@
                     <button type="submit" id="Google-Auth" class="btn btn-outline-warning w-100 mb-2">INICIAR SESIÓN CON
                         GOOGLE</button>
                     <button type="submit" id="Facebook-Auth" class="btn btn-outline-info w-100 mb-2">INICIAR SESIÓN CON
-                        FACEBOOK</button>
+                        GITHUB</button>
                 </div>
             </div>
         </div>
@@ -125,47 +164,6 @@
                         <input type="password" id="Registrarse-Password" class="form-control mb-3"
                             placeholder="Ingresa tu contraseña" required>
                         <button type="submit" class="btn btn-outline-light w-100 mb-4">REGISTRARSE</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL DE ACTUALIZACIÓN -->
-    <div class="modal fade" id="ActualizarMaestro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content bg-dark text-light">
-                <div class="modal-header bg-dark">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar Maestro</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="Formulario-ActualizarMaestro">
-                        <div class="mb-3">
-                            <label for="Actualizar-Nombre">Nombre del Maestro</label>
-                            <input type="text" id="Actualizar-Nombre" class="form-control mb-3"
-                                placeholder="Ingresa el nuevo nombre">
-                        </div>
-                        <div class="mb-3">
-                            <label for="Actualizar-Experiencia">Experiencia en años</label>
-                            <input type="number" id="Actualizar-Experiencia" class="form-control mb-3"
-                                placeholder="Ingresa la nueva experiencia en años">
-                        </div>
-                        <div class="mb-3">
-                            <label for="Actualizar-Especialidad">Especialidad</label>
-                            <input type="text" id="Actualizar-Especialidad" class="form-control mb-3"
-                                placeholder="Ingresa la nueva especialidad">
-                        </div>
-                        <div class="mb-3">
-                            <label for="Actualizar-HoraSemanales">Horas semanales de trabajo</label>
-                            <input type="number" id="Actualizar-HoraSemanales" class="form-control mb-3"
-                                placeholder="Ingresa las nuevas horas semanales">
-                        </div>
-                        <div class="mb-3">
-                            <label for="Actualizar-FechaContratacion">Fecha de Contratación</label>
-                            <input type="date" id="Actualizar-FechaContratacion" class="form-control mb-3">
-                        </div>
-                        <button class="btn btn-primary w-100 mb-2 edit Boton-ActualizarMaestro">Actualizar</button>
                     </form>
                 </div>
             </div>

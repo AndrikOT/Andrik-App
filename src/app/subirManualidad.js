@@ -1,37 +1,36 @@
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
-import { mostrarMensaje } from "./mensajes.js";
 import { db } from "./firebase.js";
 
 window.addEventListener('DOMContentLoaded', () => {
-    const formularioMaestro = document.querySelector('#Formulario-Maestro');
+    const formularioOrganizacion = document.querySelector('#Formulario-Organizacion');
 
-    formularioMaestro.addEventListener('submit', async (e) => {
+    formularioOrganizacion.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const NOMBRE = formularioMaestro['Nombre-Maestro'].value;
-        const EXPERIENCIA = parseInt(formularioMaestro['Experiencia-Maestro'].value);
-        const ESPECIALIDAD = formularioMaestro['Especialidad-Maestro'].value;
-        const HORAS_SEMANALES = parseInt(formularioMaestro['Horas-Semanales-Maestro'].value);
-        const FECHA_CONTRATACION = formularioMaestro['Fecha-Contratacion-Maestro'].value;
+        const NOMBRE = formularioOrganizacion['Nombre-Organizacion'].value;
+        const INTEGRANTES = parseInt(formularioOrganizacion['Integrantes-Organizacion'].value);
+        const LIDER = formularioOrganizacion['Lider-Organizacion'].value;
+        const NUMERO_ALIADOS = parseInt(formularioOrganizacion['NumeroAliados-Organizacion'].value);
+        const FECHA_CONTRATACION = formularioOrganizacion['Fecha-Contratacion-Organizacion'].value;
 
         try {
             // Utiliza addDoc para agregar un documento con un identificador generado automáticamente
-            const nuevoMaestroRef = await addDoc(collection(db, 'Maestros'), {
+            const nuevaOrganizacionRef = await addDoc(collection(db, 'Organizaciones'), {
                 Nombre: NOMBRE,
-                Experiencia: EXPERIENCIA,
-                Especialidad: ESPECIALIDAD,
-                HorasSemanales: HORAS_SEMANALES,
+                Integrantes: INTEGRANTES,
+                Lider: LIDER,
+                NumeroAliados: NUMERO_ALIADOS,
                 FechaContratacion: FECHA_CONTRATACION
             });
 
             // Muestra un mensaje si todo sale bien
-            // mostrarMensaje(`Maestro ${NOMBRE} ha sido registrado exitosamente`);
+            alert(`La organización ${NOMBRE} ha sido registrada exitosamente`);
 
             // Limpia el formulario
-            formularioMaestro.reset();
+            formularioOrganizacion.reset();
         } catch (error) {
             // Maneja el error y muestra un mensaje con el error
-            // mostrarMensaje('Error al registrar al maestro:', 'noValido');
+            alert('Error al registrar la organización:', 'noValido');
         }
     });
 });

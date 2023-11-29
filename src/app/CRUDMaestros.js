@@ -1,107 +1,106 @@
 import { deleteDoc, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
 import { db } from "./firebase.js";
 
-const Maestros = document.querySelector('.Maestros');
-const FormularioActualizarMaestro = document.querySelector('#Formulario-ActualizarMaestro');
+const Organizaciones = document.querySelector('.Organizaciones');
+const FormularioActualizarOrganizacion = document.querySelector('#Formulario-ActualizarOrganizacion');
 
-const obtenerMaestros = (id) => getDoc(doc(db, 'Maestros', id));
+const obtenerOrganizacion = (id) => getDoc(doc(db, 'Organizaciones', id));
 
 let id = '';
 
-// Nueva función para actualizar manualidad
-const actualizarManualidad = async (id, nuevosValores) => {
+// Nueva función para actualizar organización
+const actualizarOrganizacion = async (id, nuevosValores) => {
     try {
-        await updateDoc(doc(db, 'Maestros', id), nuevosValores);
-        alert('Manualidad actualizada correctamente');
+        await updateDoc(doc(db, 'Organizaciones', id), nuevosValores);
+        alert('Organización actualizada correctamente');
     } catch (error) {
-        alert('Error al actualizar la manualidad', 'error');
+        alert('Error al actualizar la organización', 'error');
     }
 };
 
-export const MostrarListaMaestros = (Datos) => {
+export const MostrarListaOrganizaciones = (Datos) => {
     if (Datos.length) {
         let html = '';
         Datos.forEach(documento => {
-            const Maestro = documento.data();
+            const Organizacion = documento.data();
             const idDocumento = documento.id; // Obtén el identificador del documento
             const li = `
                 <li class="list-group-item list-group-item-action">
-                    <h5> Nombre del maestro: ${Maestro.Nombre} </h5>
-                    <p> Experiencia laboral: ${Maestro.Experiencia} </p>
-                    <p> Especialidad: ${Maestro.Especialidad} </p>
-                    <p> Fecha de contrato: ${Maestro.FechaContratacion} </p>
-                    <p> Horas Semanales: ${Maestro.HorasSemanales} </p>
-                    <button class="btn btn-outline-warning w-100 mb-2 botoneSinSesion Eliminar-Maestro" data-id="${idDocumento}"> Eliminar </button>
-                    <button class="btn btn-outline-success w-100 mb-2 botoneSinSesion Actualizar-Maestro" data-id="${idDocumento}" data-bs-toggle="modal" data-bs-target="#ActualizarMaestro"> Actualizar </button>
+                    <h5> Nombre de la organización: ${Organizacion.Nombre} </h5>
+                    <p> Integrantes: ${Organizacion.Integrantes} </p>
+                    <p> Líder: ${Organizacion.Lider} </p>
+                    <p> Número de Aliados: ${Organizacion.NumeroAliados} </p>
+                    <p> Fecha de Contratación: ${Organizacion.FechaContratacion} </p>
+                    <button class="btn btn-outline-warning w-100 mb-2 botoneSinSesion Eliminar-Organizacion" data-id="${idDocumento}"> Eliminar </button>
+                    <button class="btn btn-outline-success w-100 mb-2 botoneSinSesion Actualizar-Organizacion" data-id="${idDocumento}" data-bs-toggle="modal" data-bs-target="#ActualizarOrganizacion"> Actualizar </button>
                 </li>
             `;
             html += li;
         });
-        Maestros.innerHTML = html;
+        Organizaciones.innerHTML = html;
 
-        const BotonesEliminar = Maestros.querySelectorAll('.Eliminar-Maestro');
+        const BotonesEliminar = Organizaciones.querySelectorAll('.Eliminar-Organizacion');
 
-        // ELIMINAR MANUALIDADES
+        // ELIMINAR ORGANIZACIONES
         BotonesEliminar.forEach(BotonEliminarIndividual => {
             BotonEliminarIndividual.addEventListener('click', async (event) => {
                 const Documento = event.target.dataset.id;
                 try {
-                    await deleteDoc(doc(db, 'Maestros', Documento));
+                    await deleteDoc(doc(db, 'Organizaciones', Documento));
                     // Puedes agregar aquí algún código adicional después de eliminar el documento, si es necesario
                 } catch (error) {
-                    alert('Error al eliminar la manualidad:', 'error');
+                    alert('Error al eliminar la organización:', 'error');
                 }
             });
         });
 
-        const BotonesActualizar = Maestros.querySelectorAll('.Actualizar-Maestro');
+        const BotonesActualizar = Organizaciones.querySelectorAll('.Actualizar-Organizacion');
 
         BotonesActualizar.forEach(BotonActualizarIndividual => {
             BotonActualizarIndividual.addEventListener('click', async (e) => {
-                const identificadorDocumento = await obtenerMaestros(e.target.dataset.id);
+                const identificadorDocumento = await obtenerOrganizacion(e.target.dataset.id);
 
                 // Accede a los datos del documento utilizando el método data()
                 const DATOSDOCUMENTO = identificadorDocumento.data();
 
                 // Ahora puedes acceder a las propiedades del documento
-                const NOMBRE = FormularioActualizarMaestro['Actualizar-Nombre'];
-                const EXPERIENCIA = FormularioActualizarMaestro['Actualizar-Experiencia'];
-                const ESPECIALIDAD = FormularioActualizarMaestro['Actualizar-Especialidad'];
-                const FECHA_CONTRATACION = FormularioActualizarMaestro['Actualizar-FechaContratacion'];
-                const HORAS_SEMANALES = FormularioActualizarMaestro['Actualizar-HoraSemanales'];
+                const NOMBRE = FormularioActualizarOrganizacion['Actualizar-Nombre'];
+                const INTEGRANTES = FormularioActualizarOrganizacion['Actualizar-Integrantes'];
+                const LIDER = FormularioActualizarOrganizacion['Actualizar-Lider'];
+                const NUMERO_ALIADOS = FormularioActualizarOrganizacion['Actualizar-NumeroAliados'];
+                const FECHA_CONTRATACION = FormularioActualizarOrganizacion['Actualizar-FechaContratacion'];
 
-                NOMBRE.value = DATOSDOCUMENTO.Nombre; // Accede a la propiedad 'Titulo' del objeto data
-                EXPERIENCIA.value = DATOSDOCUMENTO.Experiencia; // Accede a la propiedad 'Titulo' del objeto data
-                ESPECIALIDAD.value = DATOSDOCUMENTO.Especialidad; // Accede a la propiedad 'Titulo' del objeto data
-                FECHA_CONTRATACION.value = DATOSDOCUMENTO.FechaContratacion; // Accede a la propiedad 'Titulo' del objeto data
-                HORAS_SEMANALES.value = DATOSDOCUMENTO.HorasSemanales; // Accede a la propiedad 'Descripcion' del objeto data
+                NOMBRE.value = DATOSDOCUMENTO.Nombre;
+                INTEGRANTES.value = DATOSDOCUMENTO.Integrantes;
+                LIDER.value = DATOSDOCUMENTO.Lider;
+                NUMERO_ALIADOS.value = DATOSDOCUMENTO.NumeroAliados;
+                FECHA_CONTRATACION.value = DATOSDOCUMENTO.FechaContratacion;
+
                 id = identificadorDocumento.id;
             });
         });
 
-        // Evento para actualizar la manualidad al enviar el formulario
-        FormularioActualizarMaestro.addEventListener('submit', async (e) => {
+        // Evento para actualizar la organización al enviar el formulario
+        FormularioActualizarOrganizacion.addEventListener('submit', async (e) => {
             e.preventDefault();
             try {
                 // Validar campos aquí si es necesario
-                const NOMBRE = FormularioActualizarMaestro['Actualizar-Nombre'].value;
-                const EXPERIENCIA = FormularioActualizarMaestro['Actualizar-Experiencia'].value;
-                const ESPECIALIDAD = FormularioActualizarMaestro['Actualizar-Especialidad'].value;
-                const FECHA_CONTRATACION = FormularioActualizarMaestro['Actualizar-FechaContratacion'].value;
-                const HORAS_SEMANALES = FormularioActualizarMaestro['Actualizar-HoraSemanales'].value;
+                const NOMBRE = FormularioActualizarOrganizacion['Actualizar-Nombre'].value;
+                const INTEGRANTES = FormularioActualizarOrganizacion['Actualizar-Integrantes'].value;
+                const LIDER = FormularioActualizarOrganizacion['Actualizar-Lider'].value;
+                const NUMERO_ALIADOS = FormularioActualizarOrganizacion['Actualizar-NumeroAliados'].value;
+                const FECHA_CONTRATACION = FormularioActualizarOrganizacion['Actualizar-FechaContratacion'].value;
 
-                // Llamada directa a la función actualizarManualidad
-                await actualizarManualidad(id, {
+                await actualizarOrganizacion(id, {
                     Nombre: NOMBRE,
-                    Experiencia: EXPERIENCIA,
-                    Especialidad: ESPECIALIDAD,
+                    Integrantes: INTEGRANTES,
+                    Lider: LIDER,
+                    NumeroAliados: NUMERO_ALIADOS,
                     FechaContratacion: FECHA_CONTRATACION,
-                    HorasSemanales: HORAS_SEMANALES,
-                    // Agrega aquí otras propiedades que necesitas actualizar
                 });
 
                 // Cerrar el modal (si es un modal)
-                const actualizarModal = document.querySelector('#ActualizarMaestro');
+                const actualizarModal = document.querySelector('#ActualizarOrganizacion');
                 const modal = bootstrap.Modal.getInstance(actualizarModal);
                 modal.hide();
             } catch (error) {
@@ -110,7 +109,7 @@ export const MostrarListaMaestros = (Datos) => {
         });
 
     } else if (Datos.length === 0) {
-        Maestros.innerHTML = `
+        Organizaciones.innerHTML = `
             <h1>
                 Para visualizar el contenido es necesario que inicies sesión
                 <br><br>
