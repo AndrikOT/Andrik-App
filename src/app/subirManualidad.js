@@ -25,13 +25,13 @@ window.addEventListener('DOMContentLoaded', () => {
             });
 
             // Muestra un mensaje si todo sale bien
-            mostrarMensaje(`Maestro ${NOMBRE} ha sido registrado exitosamente`);
+            // mostrarMensaje(`Maestro ${NOMBRE} ha sido registrado exitosamente`);
 
             // Limpia el formulario
             formularioMaestro.reset();
         } catch (error) {
             // Maneja el error y muestra un mensaje con el error
-            mostrarMensaje('Error al registrar al maestro:', 'noValido');
+            // mostrarMensaje('Error al registrar al maestro:', 'noValido');
         }
     });
 });

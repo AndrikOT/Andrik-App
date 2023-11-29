@@ -1,5 +1,4 @@
 import { deleteDoc, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
-import { mostrarMensaje } from "./mensajes.js";
 import { db } from "./firebase.js";
 
 const Maestros = document.querySelector('.Maestros');
@@ -13,9 +12,9 @@ let id = '';
 const actualizarManualidad = async (id, nuevosValores) => {
     try {
         await updateDoc(doc(db, 'Maestros', id), nuevosValores);
-        mostrarMensaje('Manualidad actualizada correctamente');
+        alert('Manualidad actualizada correctamente');
     } catch (error) {
-        mostrarMensaje('Error al actualizar la manualidad', 'error');
+        alert('Error al actualizar la manualidad', 'error');
     }
 };
 
@@ -50,7 +49,7 @@ export const MostrarListaMaestros = (Datos) => {
                     await deleteDoc(doc(db, 'Maestros', Documento));
                     // Puedes agregar aquí algún código adicional después de eliminar el documento, si es necesario
                 } catch (error) {
-                    mostrarMensaje('Error al eliminar la manualidad:', 'error');
+                    alert('Error al eliminar la manualidad:', 'error');
                 }
             });
         });
@@ -106,7 +105,7 @@ export const MostrarListaMaestros = (Datos) => {
                 const modal = bootstrap.Modal.getInstance(actualizarModal);
                 modal.hide();
             } catch (error) {
-                mostrarMensaje(error.message, 'error');
+                alert(error.message, 'error');
             }
         });
 

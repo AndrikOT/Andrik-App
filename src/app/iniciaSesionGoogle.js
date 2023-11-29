@@ -1,5 +1,4 @@
 import { GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js";
-import { mostrarMensaje } from "./mensajes.js";
 import { auth } from "./firebase.js";
 
 const GoogleAuthButton = document.querySelector('#Google-Auth');
@@ -13,7 +12,7 @@ GoogleAuthButton.addEventListener('click', async () => {
             MODAL = bootstrap.Modal.getInstance(MODALINICIASESION);
         MODAL.hide()
 
-        mostrarMensaje(`Bienvenido ${CREDENCIALES.user.displayName}`)
+        alert(`Bienvenido ${CREDENCIALES.user.displayName}`)
     } catch (error) {
         console.log(error.code);
     }

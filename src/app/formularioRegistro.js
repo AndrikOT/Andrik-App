@@ -1,6 +1,5 @@
 import { createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js";
 import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
-import { mostrarMensaje } from "./mensajes.js";
 import { auth, db } from "./firebase.js";
 
 const formularioRegistro = document.querySelector('#Formulario-Registro');
@@ -25,16 +24,16 @@ formularioRegistro.addEventListener('submit', async (e) => {
         const MODAL = bootstrap.Modal.getInstance(MODALREGISTRO);
         MODAL.hide();
 
-        mostrarMensaje(`Bienvenido ${CREDENCIALES.user.email}. Se ha creado tu cuenta como Usuario.`);
+        alert(`Bienvenido ${CREDENCIALES.user.email}. Se ha creado tu cuenta como Usuario.`);
     } catch (error) {
         if (error.code === 'auth/invalid-email') {
-            mostrarMensaje('Correo inválido', 'noValido');
+            alert('Correo inválido', 'noValido');
         } else if (error.code === 'auth/weak-password') {
-            mostrarMensaje('Contraseña demasiado corta', 'noValido');
+            alert('Contraseña demasiado corta', 'noValido');
         } else if (error.code === 'auth/email-already-in-use') {
-            mostrarMensaje('El correo ya está en uso', 'noValido');
+            alert('El correo ya está en uso', 'noValido');
         } else if (error.code) {
-            mostrarMensaje('Algo salió mal', 'noValido');
+            alert('Algo salió mal', 'noValido');
         }
     }
 });
