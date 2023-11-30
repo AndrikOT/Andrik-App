@@ -1,6 +1,6 @@
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js";
 import { getDocs, collection } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
-import { MostrarListaOrganizaciones } from "./app/CRUDMaestros.js";
+import { MostrarListaOrganizaciones } from "./app/CRUDOrganizaciones.js";
 import { revisaSesion } from "./app/revisaSesion.js";
 import { auth, db } from "./app/firebase.js";
 import './app/iniciaSesionEmailAndPass.js'
